@@ -5,7 +5,7 @@ This is a fork of [Erikvl87/docker-languagetool](https://github.com/Erikvl87/doc
 - **Automatic N-gram Download**: Added automatic downloading of n-gram datasets to a Docker volume
   - Set `NGRAMS_FILE` environment variable to specify which n-gram file to download (e.g., `ngrams-en-20150817.zip`)
   - Downloads occur on first startup and are cached in a persistent volume
-  - **GitHub Container Registry**: Docker images are published to GitHub Container Registry instead of Docker Hub. Image: `ghcr.io/ben16w/languagetool:latest`
+  - **GitHub Container Registry**: Docker images are published to GitHub Container Registry instead of Docker Hub. Image: `ghcr.io/ben16w/docker-languagetool:latest`
 
 ---
 
