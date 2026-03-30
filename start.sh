@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Download n-grams if configured
+if [ -n "$NGRAMS_FILE" ]; then
+  bash /LanguageTool/download-ngram.sh
+  
+  # Set language model path if ngrams were downloaded
+  if [ -d "/ngrams" ] && [ "$(ls -A /ngrams)" ]; then
+    export langtool_languageModel=/ngrams
+  fi
+fi
+
 config_injected=false
 
 for varname in ${!langtool_*}

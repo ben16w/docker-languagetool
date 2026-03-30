@@ -73,11 +73,15 @@ RUN apk add --no-cache \
     fasttext \
     libc6-compat \
     libstdc++ \
-    openjdk17-jre-headless
+    openjdk17-jre-headless \
+    unzip
 
 RUN if [ "$TARGETARCH" = "arm64" ]; then \
         apk add --no-cache hunspell zip; \
     fi
+
+# Create ngrams directory with proper permissions
+RUN mkdir -p /ngrams && chown languagetool:languagetool /ngrams
 
 RUN addgroup -S languagetool && adduser -S languagetool -G languagetool
 
@@ -100,7 +104,8 @@ WORKDIR /LanguageTool
 
 RUN mkdir /nonexistent && touch /nonexistent/.languagetool.cfg
 
-COPY --chown=languagetool:languagetool start.sh config.properties ./
+COPY --chown=languagetool:languagetool start.sh config.properties download-ngram.sh ./
+RUN chmod +x start.sh download-ngram.sh
 
 RUN install -d -m 755 /fastText \
     && curl -L https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin -o /fastText/lid.176.bin \

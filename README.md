@@ -1,3 +1,15 @@
+# Fork Notice
+
+This is a fork of [Erikvl87/docker-languagetool](https://github.com/Erikvl87/docker-languagetool) with the following changes:
+
+- **Automatic N-gram Download**: Added automatic downloading of n-gram datasets to a Docker volume
+  - Set `NGRAMS_FILE` environment variable to specify which n-gram file to download (e.g., `ngrams-en-20150817.zip`)
+  - Downloads occur on first startup and are cached in a persistent volume
+- **GitHub Container Registry**: Docker images are published to GitHub Container Registry instead of Docker Hub
+  - Image: `ghcr.io/ben16w/languagetool:latest`
+
+---
+
 [![Build Status](https://github.com/Erikvl87/docker-languagetool/workflows/Build/badge.svg)](https://github.com/Erikvl87/docker-languagetool) [![Tests Status](https://github.com/Erikvl87/docker-languagetool/workflows/Tests/badge.svg)](https://github.com/Erikvl87/docker-languagetool) [![Docker Pulls](https://img.shields.io/docker/pulls/erikvl87/languagetool)](https://hub.docker.com/r/erikvl87/languagetool) [![Latest GitHub tag](https://img.shields.io/github/v/tag/Erikvl87/docker-languagetool?label=GitHub%20tag)](https://github.com/Erikvl87/docker-languagetool/releases) 
  
 # Dockerfile for LanguageTool 

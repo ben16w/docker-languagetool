@@ -4,14 +4,17 @@ version: "3"
 
 services:
   languagetool:
-    image: erikvl87/languagetool
+    image: ghcr.io/ben16w/languagetool:latest
     container_name: languagetool
     ports:
       - 8010:8010                        # Using default port from the image
     environment:
-      - langtool_languageModel=/ngrams   # OPTIONAL: Using ngrams data
+      - NGRAMS_FILE=ngrams-en-20150817.zip  # OPTIONAL: Automatically download n-gram file. Remove to disable.
       - Java_Xms=512m                    # OPTIONAL: Setting a minimal Java heap size of 512 mib
       - Java_Xmx=1g                      # OPTIONAL: Setting a maximum Java heap size of 1 Gib
     volumes:
-      - /path/to/ngrams/data:/ngrams     # OPTIONAL: The location of ngrams data on the local machine
+      - ngrams-data:/ngrams              # Persistent volume for n-gram data
       - /path/to/logback.xml:/LanguageTool/logback.xml:ro  # OPTIONAL: Overwrite the logging configuration
+
+volumes:
+  ngrams-data:                           # Named volume to persist n-gram datasets
